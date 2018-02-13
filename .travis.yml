@@ -4,7 +4,7 @@ python:
 
 #Oops forgot to install modules
 install:
--pip install requests
+ - pip install requests
 
 # command to run tests
 script:
