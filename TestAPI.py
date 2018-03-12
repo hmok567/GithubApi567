@@ -1,12 +1,37 @@
 from HW04 import numCommits, repoList
 import unittest
+from unittest.mock import Mock, patch
 
-class TestHW04(unittest.TestCase):
-    def test_repoList(self):
-        self.assertEqual(len(repoList('hmokingbird')), 8, 'Wrong number')
-    
-    def test_numCommits(self):
-        self.assertEqual(numCommits('hmokingbird', 'GoMusicBot'), 26, 'Not correct number of commits')
+
+class Test04(unittest.TestCase):
+    @patch('requests.get')
+    def test_repoList(self, mock_get):
+            repojson = [{
+                'name': 'TestRepo'}
+            ]
+            #mock_get.return_value = repojson
+            mock_get.return_value.json.return_value = repojson
+            response = repoList('Guy')
+            self.assertEqual(response, ['TestRepo'])
+
+    @patch('requests.get')    
+    def test_numCommits(self, mock_get):
+            repocommits = [{
+                '0': {'commit': '1'}
+            },
+                {'1': {'commit': '2'}
+            },
+
+                {'2': {'commit': '3'}
+            },
+                {'3': {'commit': '4'}
+            }
+
+            ]
+            mock_get.return_value.json.return_value = repocommits
+            response = numCommits('Test', 'Also Test')
+            self.assertEqual(response, 4)
+            
 
 if __name__ == "__main__":
     print('Running unit tests...')
