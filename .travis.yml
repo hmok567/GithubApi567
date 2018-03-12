@@ -6,9 +6,10 @@ python:
 install:
  - pip install requests codecov
 
-after_success:
- - codecov
- 
 # command to run tests
 script:
  - python -m unittest TestAPI
+ - coverage run TestAPI.py
+
+ after_success:
+ - codecov
