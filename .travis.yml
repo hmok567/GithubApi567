@@ -4,8 +4,11 @@ python:
 
 #Oops forgot to install modules
 install:
- - pip install requests
+ - pip install requests codecov
 
+after_success:
+ - codecov
+ 
 # command to run tests
 script:
  - python -m unittest TestAPI
