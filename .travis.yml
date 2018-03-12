@@ -10,6 +10,7 @@ install:
 script:
  - python -m unittest TestAPI
  - coverage run TestAPI.py
+ - codecov
 
  after_success:
  - codecov
